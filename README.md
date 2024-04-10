@@ -1,4 +1,4 @@
-# Repositório do projeto Blogs API
+# Repositório do projeto Blogs API 📝
  ## Módulo: BACK-END
  
   Repositório possui projeto desenvolvido no período que estive na <b>Trybe</b>, abordando os conceitos de <b>RESTFul API</b> com CRUD completo utilizando arquitetura Model-Service-Controller (MSC). 
