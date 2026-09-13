@@ -11,6 +11,10 @@ app.use(express.json());
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+app.get('/', (_req: Request, res: Response) => {
+  res.redirect('/api-docs');
+});
+
 app.use('/post', postRouter);
 
 app.use('/categories', categoriesRouter);

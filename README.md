@@ -129,6 +129,23 @@ A API estará disponível em `http://localhost:3000`.
 
 ---
 
+## 🌐 Deploy Rápido e Gratuito no Render.com (com SQLite)
+
+Para disponibilizar sua API online para recrutadores testarem o Swagger sem precisar pagar por instâncias de banco MySQL:
+
+1. Crie um novo **Web Service** no [Render.com](https://render.com/) e conecte este repositório.
+2. Configure os campos de deploy:
+   - **Environment:** `Node`
+   - **Build Command:** `npm install && npm run build:render && npm run setup:render`
+   - **Start Command:** `npm start`
+3. Adicione as seguintes **Environment Variables** no painel do Render:
+   - `DATABASE_URL`: `file:./dev.db`
+   - `JWT_SECRET`: `suaChaveSecretaJWT`
+   - `NODE_ENV`: `production`
+4. Ao concluir o deploy, qualquer pessoa que acessar a URL raiz (ex: `https://sua-api.onrender.com/`) será redirecionada automaticamente para a interface interativa do **Swagger**!
+
+---
+
 ## 🧪 Scripts Disponíveis
 
 | Comando | Descrição |

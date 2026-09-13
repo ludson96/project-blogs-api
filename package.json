@@ -20,6 +20,8 @@
   "main": "dist/server.js",
   "scripts": {
     "build": "prisma generate && tsc",
+    "build:render": "prisma generate --schema=prisma/schema.sqlite.prisma && tsc",
+    "setup:render": "prisma db push --schema=prisma/schema.sqlite.prisma && npm run prisma:seed",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
