@@ -1,4 +1,6 @@
-/__tests__
-**/migrations/
-**/seeders/
-**/models/
+node_modules/
+dist/
+build/
+prisma/
+coverage/
+__tests__/
