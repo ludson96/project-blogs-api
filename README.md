@@ -1,6 +1,6 @@
 # Blogs API 📝
 
-Uma API RESTful robusta e escalável desenvolvida em **Node.js com TypeScript**, aplicando arquitetura em camadas **MSC (Model-Service-Controller)**, persistência com **Sequelize ORM** e banco de dados **MySQL**, autenticação segura via **JWT** e documentação interativa com **Swagger (OpenAPI 3.0)**.
+Uma API RESTful robusta e escalável desenvolvida em **Node.js com TypeScript**, aplicando arquitetura em camadas **MSC (Model-Service-Controller)**, persistência com **Prisma ORM** e banco de dados **MySQL**, autenticação segura via **JWT** e documentação interativa com **Swagger (OpenAPI 3.0)**.
 
 ---
 
@@ -9,8 +9,8 @@ Uma API RESTful robusta e escalável desenvolvida em **Node.js com TypeScript**,
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 ![NodeJS](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
 ![Express](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
-![Sequelize](https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white)
 ![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white)
 ![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=black)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
@@ -19,10 +19,10 @@ Uma API RESTful robusta e escalável desenvolvida em **Node.js com TypeScript**,
 
 ## 📌 Destaques do Projeto
 
-- **Arquitetura em Camadas (MSC):** Separação rigorosa de responsabilidades entre regras de negócio (*Services*), orquestração de requisições (*Controllers*) e persistência de dados (*Models*).
+- **Arquitetura em Camadas (MSC):** Separação rigorosa de responsabilidades entre regras de negócio (*Services*), orquestração de requisições (*Controllers*) e persistência de dados (*Data Access* com Prisma).
 - **Tipagem Estrita com TypeScript:** Interfaces e DTOs definidos para garantir previsibilidade em payloads, queries e parâmetros.
 - **Autenticação & Autorização JWT:** Geração de token stateless, proteção de rotas com middleware de autenticação e validação de autoria para modificação e exclusão de posts.
-- **Relacionamentos no Banco de Dados (ORM):** Modelagem de relacionamentos `1:N` (*User -> BlogPosts*) e `N:N` (*BlogPosts <-> Categories*) utilizando tabela de junção intermediária.
+- **Relacionamentos no Banco de Dados (Prisma ORM):** Modelagem elegante de relacionamentos `1:N` (*User -> BlogPosts*) e `N:N` (*BlogPosts <-> Categories*) com type-safety nativa.
 - **Paginação de Recursos:** Endpoint de listagem de posts otimizado para grandes volumes com suporte a `?page=X&limit=Y`.
 - **Documentação Interativa (Swagger UI):** Teste de todos os endpoints diretamente pelo navegador com suporte a inserção do token Bearer JWT.
 
@@ -114,8 +114,8 @@ erDiagram
 
 5. **Execute as migrações e seeders:**
    ```bash
-   npm run prestart
-   npm run seed
+   npx prisma db push
+   npm run prisma:seed
    ```
 
 6. **Inicie a aplicação:**
@@ -134,11 +134,12 @@ A API estará disponível em `http://localhost:3000`.
 | Comando | Descrição |
 | :--- | :--- |
 | `npm run dev` | Inicia o servidor em modo de desenvolvimento com `ts-node-dev` (hot-reload) |
-| `npm run build` | Compila o projeto TypeScript para a pasta `dist/` |
-| `npm start` | Inicia a aplicação executando o código compilado em produção |
-| `npm run lint` | Executa o linter para validação estática de padrões de código |
-| `npm run prestart` | Executa `db:create` e `db:migrate` via Sequelize CLI |
-| `npm run seed` | Popula o banco com os seeders iniciais |
+| `npm run build` | Gera o cliente Prisma e compila o TypeScript para `dist/` |
+| `npm start` | Executa a aplicação compilada em produção |
+| `npm run prisma:push` | Sincroniza o schema do Prisma diretamente com o banco de dados |
+| `npm run prisma:seed` | Popula o banco com os dados iniciais do blog |
+| `npm run prisma:studio`| Abre a interface visual do Prisma Studio no navegador |
+| `npm run lint` | Executa a checagem estática de linter |
 
 ---
 

@@ -30,11 +30,11 @@ services:
     ports:
       # Expõe a porta padrão da aplicação: altere aqui caso use outra porta
       - 3000:3000
-    # Configura as variáveis de ambiente dentro do container
     environment:
+      DATABASE_URL: "mysql://root:1234@db:3306/blogs_api"
       MYSQL_USER: root
       MYSQL_PASSWORD: 1234
-      MYSQL_HOST: db # Nome do service logo abaixo
+      MYSQL_HOST: db
       JWT_SECRET: secretJWT
       API_HOST: 'node'
       API_PORT: 3000

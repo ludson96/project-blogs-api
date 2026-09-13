@@ -1,6 +1,6 @@
 import * as blogPostController from './blogpost.controller';
-import * as CategoryController from './category.controllers';
-import * as UserController from './user.controllers';
+import * as CategoryController from './category.controller';
+import * as UserController from './user.controller';
 
 export {
   blogPostController,

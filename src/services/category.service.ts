@@ -1,13 +1,13 @@
-import models from '../models';
-
-const { Category } = models;
+import prisma from '../prisma';
 
 export const createCategory = async (name: string): Promise<any> => {
-  return Category.create({ name });
+  return prisma.category.create({
+    data: { name },
+  });
 };
 
 export const getAllCategory = async (): Promise<any[]> => {
-  return Category.findAll();
+  return prisma.category.findMany();
 };
 
 export default {

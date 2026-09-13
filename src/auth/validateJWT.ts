@@ -1,8 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import models from '../models';
+import prisma from '../prisma';
 
-const { User } = models;
 const secret: string = process.env.JWT_SECRET || 'seusecretdetoken';
 
 export interface AuthenticatedRequest extends Request {
@@ -16,7 +15,9 @@ const validateJWT = async (req: AuthenticatedRequest, res: Response, next: NextF
 
   try {
     const decoded = jwt.verify(token, secret) as { data: { id: number } };
-    const user = await User.findByPk(decoded.data.id);
+    const user = await prisma.user.findUnique({
+      where: { id: decoded.data.id },
+    });
 
     if (!user) return res.status(401).json({ message: 'Erro ao procurar usuário do token' });
 
