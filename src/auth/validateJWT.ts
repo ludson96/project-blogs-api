@@ -9,9 +9,13 @@ export interface AuthenticatedRequest extends Request {
 }
 
 const validateJWT = async (req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<any> => {
-  const token = req.header('Authorization');
+  let token = req.header('Authorization');
 
   if (!token) return res.status(401).json({ message: 'Token not found' });
+
+  if (token.startsWith('Bearer ')) {
+    token = token.slice(7).trim();
+  }
 
   try {
     const decoded = jwt.verify(token, secret) as { data: { id: number } };

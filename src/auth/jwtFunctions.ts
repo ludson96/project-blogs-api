@@ -14,7 +14,8 @@ export const createToken = (userWithoutPassword: Record<string, any>): string =>
 
 export const verifyToken = (authorization: string): any => {
   try {
-    const payload = jwt.verify(authorization, secret);
+    const token = authorization.startsWith('Bearer ') ? authorization.slice(7).trim() : authorization;
+    const payload = jwt.verify(token, secret);
     return payload;
   } catch (erro) {
     return { isError: true, erro };
