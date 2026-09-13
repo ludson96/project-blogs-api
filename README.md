@@ -1,327 +1,168 @@
-# Repositório do projeto Blogs API 📝
- ## Módulo: BACK-END
- 
-  Repositório possui projeto desenvolvido no período que estive na <b>Trybe</b>, abordando os conceitos de <b>RESTFul API</b> com CRUD completo utilizando arquitetura Model-Service-Controller (MSC). 
-## Informações de aprendizados
-- Este é um projeto desenvolvido para me ajudar a aprender sobre `sequelize` e `JWT`;
-- Meu primeiro projeto usando `sequelize` e `JWT`;
-- Utilizei o Cliente Rest `Thunder Client`, como extensão, para visualizar o retorno do meu acesso.
-## Linguagem usadas
+# Blogs API 📝
 
-[![JavaScript][JavaScript-logo]][JavaScript-url]
-[![NodeJS][NodeJS-logo]][NodeJS-url]
-[![Express][Express-logo]][Express-url]
-[![MySQL][MySQL-logo]][MySQL-url]
-[![Sequelize][Sequelize-logo]][Sequelize-url]
-[![JWT][JWT-logo]][JWT-url]
-[![Docker][Docker-logo]][Docker-url]
-[![.ENV][.ENV-logo]][.ENV-url]
-[![Nodemon][Nodemon-logo]][Nodemon-url]
-[![ESLint][ESLint-logo]][ESLint-url]
-## O que foi desenvolvido
-<p> 
- Uma API e um banco de dados, utilizando a arquitetura MSC (model-service-controller), para a produção de conteúdo para um blog! <br>
- 
- 1. Desenvolvi endpoints que estarão conectados ao banco de dados seguindo os princípios do REST;<br>
- 2. Para fazer um post é necessário usuário e login, portanto foi trabalhada a relação entre user e post; <br>
- 3. Será necessária a utilização de categorias para os posts, trabalhando, assim, a relação de posts para categories e de categories para posts. <br>
-</p>
+Uma API RESTful robusta e escalável desenvolvida em **Node.js com TypeScript**, aplicando arquitetura em camadas **MSC (Model-Service-Controller)**, persistência com **Sequelize ORM** e banco de dados **MySQL**, autenticação segura via **JWT** e documentação interativa com **Swagger (OpenAPI 3.0)**.
 
-> `docker-compose.yml`, `config.js` e `/seeders` arquivos providos pela Trybe.
+---
 
-## Variáveis de Ambiente
+## 🚀 Tecnologias e Ferramentas
 
-Para rodar esse projeto, atente-se as variáveis de ambiente no seu .env. Existe um arquivo `.env.example` com as informações para configuração.
-## Instruções para instalar e rodar
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![NodeJS](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
+![Express](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![Sequelize](https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white)
+![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=black)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
-1. Clone o repo:
-```
-  git clone git@github.com:Ludson96/project-blogs-api.git
-```
-2. Já existe um arquivo docker-compose.yml. Bastando usar o comando docker-compose up para rodar o MySQL e o Node pelo docker. Execute os services do docker: `node` e `db` 
-```
-  docker-compose up -d
-```
-3. Inicie o container node (renomeado para blogs_api):
-```
-  docker exec -it blogs_api bash
-```
-4. Instale as suas dependências:
-```
-  npm install
-```
-5. Execute o servidor:
+---
 
-```
-  npm start
-```
-Outra forma de executar é utilizando o `nodemom` (permite fazer alteração em tempo real sem precisar derrubar o servidor e iniciá-lo novamente):
-```
-  npm run debug
-```
-6. Utilizar alguma Plataforma de API para acessar os endpoints e fazer seus devidos experimentos. Exemplos: Postman e Insomnia. Ou uma extensão no VSCode, recomendo utilizar a thunder client.
+## 📌 Destaques do Projeto
 
-7. Uso
+- **Arquitetura em Camadas (MSC):** Separação rigorosa de responsabilidades entre regras de negócio (*Services*), orquestração de requisições (*Controllers*) e persistência de dados (*Models*).
+- **Tipagem Estrita com TypeScript:** Interfaces e DTOs definidos para garantir previsibilidade em payloads, queries e parâmetros.
+- **Autenticação & Autorização JWT:** Geração de token stateless, proteção de rotas com middleware de autenticação e validação de autoria para modificação e exclusão de posts.
+- **Relacionamentos no Banco de Dados (ORM):** Modelagem de relacionamentos `1:N` (*User -> BlogPosts*) e `N:N` (*BlogPosts <-> Categories*) utilizando tabela de junção intermediária.
+- **Paginação de Recursos:** Endpoint de listagem de posts otimizado para grandes volumes com suporte a `?page=X&limit=Y`.
+- **Documentação Interativa (Swagger UI):** Teste de todos os endpoints diretamente pelo navegador com suporte a inserção do token Bearer JWT.
 
-- utilize o comando `npm run prestart`, ele criará o banco de dados e as tabelas de acordo com o que está em `/migrations` e `/seeders` .
+---
 
-- Todas as rotas (exceto `post /login` e `post /user` ) requerem autenticação
-## Diagrama
+## 📖 Documentação da API (Swagger)
 
-![Diagrama de relacionamentos das tabelas](diagrama.png)
+Com a aplicação rodando, acesse a documentação interativa:
 
-> _Imagem disponibilizada pela Trybe_
-## Endpoints
+👉 **[http://localhost:3000/api-docs](http://localhost:3000/api-docs)**
 
-<details>
+Na interface do Swagger você pode:
+1. Realizar o cadastro (`POST /user`) ou login (`POST /login`).
+2. Copiar o token retornado.
+3. Clicar no botão verde **Authorize** no topo do Swagger e colar o token no formato `Bearer seu_token`.
+4. Executar e testar todas as rotas protegidas em tempo real diretamente pelo navegador.
 
-###  Rota de Login
+---
 
-####  POST `/login`
-- Entrar
-- O corpo deve ser o seguinte:
-```json
-{
-  "email" : " exemplo@email.com " ,
-  "senha" : " 123456 "
-}
-```
-  - Retorna um token se o login for concluído
+## 🏛️ Arquitetura do Banco de Dados
 
-###  Rota do Usuário
+O banco de dados relacional é estruturado conforme o diagrama:
 
-####  POST `/usuário`
-- Cria um novo usuário
-- O corpo deve ser o seguinte, onde:
-  -  `displayName` deve ter pelo menos 8 caracteres
-  -  `email` deve ter um formato válido
-  -  `password` deve ter pelo menos 6 caracteres
-  -  `imagem` é opcional
-```json
-{
-  "displayName" : " John Doe " ,
-  "email" : " exemplo@email.com " ,
-  "senha" : " 123456 " ,
-  "image" : " https://cdn1.iconfinder.com/data/icons/users-solid-1/30/users-solid-profile-neutral-5-512.png "
-}
-```
-- Se o usuário for criado com sucesso, um token é fornecido
+```mermaid
+erDiagram
+    USERS ||--o{ BLOG_POSTS : "possui"
+    BLOG_POSTS ||--|{ POSTS_CATEGORIES : "possui"
+    CATEGORIES ||--|{ POSTS_CATEGORIES : "pertence"
 
-####  GET `/usuário`
-- Lista todos os usuários:
-```json
-[
-  {
-    "id" : 1 ,
-    "displayName" : " Lewis Hamilton " ,
-    "email" : " lewishamilton@gmail.com " ,
-    "image" : " https://upload.wikimedia.org/wikipedia/commons/1/18/Lewis_Hamilton_2016_Malaysia_2.jpg "
-  },
-  /* ... */
-]
-```
-
-####  GET `/user/:id`
-- Pega um parâmetro numérico, e se houver algum usuário com id correspondente, retorna:
-```json
-{
-  "id" : 3 ,
-  "displayName" : " John Doe " ,
-  "email" : " exemplo@email.com " ,
-  "image" : " https://cdn1.iconfinder.com/data/icons/users-solid-1/30/users-solid-profile-neutral-5-512.png "
-}
-```
-
-####  DELETE `/user/me`
-- Exclui o usuário atual
-- Se o usuário for excluído com sucesso, o status `204` é retornado
-
-###  Categorias Rota
-
-####  POST `/categorias`
-- Cria uma nova categoria
-- O corpo deve ser o seguinte:
-```json
-{
-  "name" : " Truques de mágica "
-}
-```
-
-####  GET `/categorias`
-- Lista todas as categorias:
-```json
-[
-  {
-      "id" : 1 ,
-      "nome" : " Animais "
-  },
-  {
-      "id" : 2 ,
-      "nome" : " Livros "
-  },
-  /* ... */
-]
-```
-
-###  Pós Rota
-
-####  POST `/post`
-- Cria uma nova postagem no blog
-- O corpo deve ser o seguinte:
-```json
-{
-  "title" : " Resenha: A arte da columbofilia " ,
-  "content" : " Este é um ótimo livro sobre como os pombos podem ser treinados para se tornarem campeões! " ,
-  "categoryIds" : [ 1 , 2 ]
-}
-```
-
-####  GET `/post`
-- Lista todas as postagens do blog:
-```json
-[
-  {
-    "id" : 1 ,
-    "title" : " As melhores raças de cães para caça " ,
-    "content" : " Aqui estão os melhores companheiros de caça " ,
-    "userId" : 1 ,
-    "publicado" : " 2011-08-01T19:58:00.000Z " ,
-    "atualizado" : " 2011-08-01T19:58:51.000Z " ,
-    "usuário" : {
-      "id" : 1 ,
-      "displayName" : " Lewis Hamilton " ,
-      "email" : " lewishamilton@gmail.com " ,
-      "image" : " https://upload.wikimedia.org/wikipedia/commons/1/18/Lewis_Hamilton_2016_Malaysia_2.jpg "
-    },
-    "categorias" : [
-      {
-        "id" : 1 ,
-        "nome" : " Animais "
-      }
-    ]
-  },
-  
-  /* ... */
-]
-```
-
-####  GET `/post/:id`
-- Pega um parâmetro numérico, e se houver algum post com um id correspondente, retorna:
-```json
-{
-  "id" : 1 ,
-  "title" : " As melhores raças de cães para caça " ,
-  "content" : " Aqui estão os melhores companheiros de caça " ,
-  "userId" : 1 ,
-  "publicado" : " 2011-08-01T19:58:00.000Z " ,
-  "atualizado" : " 2011-08-01T19:58:51.000Z " ,
-  "usuário" : {
-      "id" : 1 ,
-      "displayName" : " Lewis Hamilton " ,
-      "email" : " lewishamilton@gmail.com " ,
-      "image" : " https://upload.wikimedia.org/wikipedia/commons/1/18/Lewis_Hamilton_2016_Malaysia_2.jpg "
-  },
-  "categorias" : [
-      {
-          "id" : 1 ,
-          "nome" : " Animais "
-      }
-  ]
-}
-```
-
-####  GET `/post/search?q=:searchTerm`
-- Pesquisa postagens por título ou conteúdo, por exemplo:
-```json
-  // GET /post/search?q=silk
-  [
-    {
-      "id" : 2 ,
-      "title" : " Ótimos livros sobre a Rota da Seda " ,
-      "content" : " Estes são alguns livros obrigatórios sobre a Rota da Seda " ,
-      "userId" : 1 ,
-      "publicado" : " 2011-08-01T19:58:00.000Z " ,
-      "atualizado" : " 2011-08-01T19:58:51.000Z " ,
-      "usuário" : {
-        "id" : 1 ,
-        "displayName" : " Lewis Hamilton " ,
-        "email" : " lewishamilton@gmail.com " ,
-        "image" : " https://upload.wikimedia.org/wikipedia/commons/1/18/Lewis_Hamilton_2016_Malaysia_2.jpg "
-      },
-      "categorias" : [
-        {
-          "id" : 2 ,
-          "nome" : " Livros "
-        }
-      ]
+    USERS {
+        int id PK
+        string display_name
+        string email
+        string password
+        string image
     }
-  ]
-```
-- Se não houver parâmetro de consulta, retorna todos os posts:
-```json
-  // GET /post/search?q=
-  [
-    {
-      "id" : 1 ,
-      "title" : " As melhores raças de cães para caça " ,
-      "content" : " Aqui estão os melhores companheiros de caça " ,
-      "userId" : 1 ,
-      "publicado" : " 2011-08-01T19:58:00.000Z " ,
-      "atualizado" : " 2011-08-01T19:58:51.000Z " ,
-      "usuário" : {
-        "id" : 1 ,
-        "displayName" : " Lewis Hamilton " ,
-        "email" : " lewishamilton@gmail.com " ,
-        "image" : " https://upload.wikimedia.org/wikipedia/commons/1/18/Lewis_Hamilton_2016_Malaysia_2.jpg "
-      },
-      "categorias" : [
-        {
-          "id" : 1 ,
-          "nome" : " Cães "
-        }
-      ]
-    },
-    
-    /* ... */
-  ]
+
+    BLOG_POSTS {
+        int id PK
+        string title
+        string content
+        int user_id FK
+        datetime published
+        datetime updated
+    }
+
+    CATEGORIES {
+        int id PK
+        string name
+    }
+
+    POSTS_CATEGORIES {
+        int post_id PK, FK
+        int category_id PK, FK
+    }
 ```
 
-####  COLOQUE `/post/:id`
-- Edita uma postagem existente
-- O corpo deve ser o seguinte, onde:
-  - não é possível alterar a categoria
-  - somente o **autor** pode editar a postagem
-```json
-{
-  "title" : " Como fazer crescer as plantas da sua casa " ,
-  "content" : " Este é um guia passo a passo para melhorar o crescimento de plantas em ambientes internos "
-}
-```
+---
 
-####  APAGAR `/post/:id`
-- Exclui uma postagem existente
-- Somente o autor pode deletar o post
-- Se a postagem for excluída com sucesso, retorna o status `204`
+## 🛠️ Como Executar o Projeto
 
-</details>
+### Pré-requisitos
+- [Docker](https://www.docker.com/) e [Docker Compose](https://docs.docker.com/compose/) instalados (Recomendado).
+- Ou [Node.js](https://nodejs.org/) (v16+) e instância local do [MySQL](https://www.mysql.com/).
 
-[JavaScript-logo]: https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E
-[JavaScript-url]: https://www.javascript.com/
-[NodeJS-logo]: https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white
-[NodeJS-url]: https://nodejs.org/en/
-[Docker-logo]: https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white
-[Docker-url]: https://www.docker.com
-[MySQL-logo]: https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white
-[MySQL-url]: https://www.mysql.com
-[Express-logo]: https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB
-[Express-url]: https://expressjs.com
-[Sequelize-logo]: https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white
-[Sequelize-url]: https://sequelize.org
-[JWT-logo]: https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens
-[JWT-url]: https://jwt.io/  
-[Nodemon-logo]: https://img.shields.io/badge/Nodemon-76D04B?logo=nodemon&logoColor=fff&style=for-the-badge
-[Nodemon-url]: https://www.npmjs.com/package/nodemon
-[ESLint-logo]: https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white
-[ESLint-url]: https://eslint.org/
-[.ENV-logo]: https://img.shields.io/badge/.ENV-ECD53F?logo=dotenv&logoColor=000&style=for-the-badge
-[.ENV-url]: https://www.npmjs.com/package/dotenv
+### Executando com Docker (Forma Rápida)
+
+1. **Clone o repositório:**
+   ```bash
+   git clone git@github.com:Ludson96/project-blogs-api.git
+   cd project-blogs-api
+   ```
+
+2. **Configure as variáveis de ambiente:**
+   Copie o arquivo de exemplo para `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+
+3. **Inicie os serviços com Docker Compose:**
+   ```bash
+   docker-compose up -d
+   ```
+
+4. **Acesse o container da aplicação:**
+   ```bash
+   docker exec -it blogs_api bash
+   ```
+
+5. **Execute as migrações e seeders:**
+   ```bash
+   npm run prestart
+   npm run seed
+   ```
+
+6. **Inicie a aplicação:**
+   ```bash
+   npm start
+   # Ou para desenvolvimento com hot-reload:
+   npm run dev
+   ```
+
+A API estará disponível em `http://localhost:3000`.
+
+---
+
+## 🧪 Scripts Disponíveis
+
+| Comando | Descrição |
+| :--- | :--- |
+| `npm run dev` | Inicia o servidor em modo de desenvolvimento com `ts-node-dev` (hot-reload) |
+| `npm run build` | Compila o projeto TypeScript para a pasta `dist/` |
+| `npm start` | Inicia a aplicação executando o código compilado em produção |
+| `npm run lint` | Executa o linter para validação estática de padrões de código |
+| `npm run prestart` | Executa `db:create` e `db:migrate` via Sequelize CLI |
+| `npm run seed` | Popula o banco com os seeders iniciais |
+
+---
+
+## 📍 Principais Endpoints
+
+| Método | Endpoint | Protegido | Descrição |
+| :--- | :--- | :---: | :--- |
+| `POST` | `/login` | ❌ | Autentica usuário e retorna JWT |
+| `POST` | `/user` | ❌ | Cadastra um novo usuário |
+| `GET` | `/user` | ✅ | Lista todos os usuários cadastrados |
+| `GET` | `/user/:id` | ✅ | Obtém detalhes de um usuário por ID |
+| `DELETE` | `/user/me` | ✅ | Exclui a própria conta logada |
+| `GET` | `/categories` | ✅ | Lista todas as categorias |
+| `POST` | `/categories` | ✅ | Cria uma nova categoria |
+| `GET` | `/post` | ✅ | Lista posts (suporta `?page=1&limit=10`) |
+| `GET` | `/post/:id` | ✅ | Obtém detalhes de um post específico |
+| `GET` | `/post/search?q=termo`| ✅ | Busca posts por título ou conteúdo |
+| `POST` | `/post` | ✅ | Cria uma nova publicação |
+| `PUT` | `/post/:id` | ✅ | Edita publicação (apenas autor) |
+| `DELETE` | `/post/:id` | ✅ | Remove publicação (apenas autor) |
+
+---
+
+## 👤 Autor
+
+Desenvolvido por **Ludson**  
+- [GitHub](https://github.com/Ludson96)

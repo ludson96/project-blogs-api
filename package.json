@@ -15,12 +15,15 @@
     "morgan": "1.10.0",
     "mysql2": "2.1.0",
     "sequelize": "6.3.4",
-    "shelljs": "0.8.4"
+    "shelljs": "0.8.4",
+    "swagger-ui-express": "^5.0.1"
   },
-  "main": "src/server.js",
+  "main": "dist/server.js",
   "scripts": {
+    "build": "tsc",
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "prestart": "npx sequelize-cli db:create && npx sequelize-cli db:migrate",
-    "start": "node .",
+    "start": "node dist/server.js",
     "start:test": "API_PORT=3030 NODE_ENV=test npm start",
     "kill:test": "if lsof -t -i:3030; then kill -9 $(lsof -t -i:3030); fi",
     "drop": "npx sequelize-cli db:drop",
@@ -30,10 +33,15 @@
     "test:dev": "npx -y wait-on -t 300000 http://localhost:3000 && NODE_ENV=development API_PORT=3000 jest -i --verbose --forceExit",
     "posttest": "npm run kill:test",
     "test-coverage": "jest -i --verbose --forceExit --coverage",
-    "debug": "nodemon .",
+    "debug": "npm run dev",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
   },
   "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^26.5.1",
+    "@types/swagger-ui-express": "^4.1.8",
     "change-case": "4.1.2",
     "eslint": "6.8.0",
     "eslint-config-airbnb-base": "14.2.0",
@@ -46,6 +54,8 @@
     "sequelize-cli": "6.2.0",
     "sequelize-jest-helpers-trybe": "1.0.0",
     "supertest": "4.0.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^7.0.2",
     "wait-on": "6.0.1"
   }
 }

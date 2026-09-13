@@ -6,11 +6,7 @@ services:
     # Faz o build do Dockerfile da pasta atual e utiliza o resultado desse build
     # como a imagem do container
     build: .
-    # Define um user específico, diferente de root para a execução dos comandos
-    # user: eval
-    # Nome do container para facilitar execução
     container_name: blogs_api
-    # Mesmo que `docker run -t`
     tty: true
     # Mesmo que `docker run -i`
     stdin_open: true

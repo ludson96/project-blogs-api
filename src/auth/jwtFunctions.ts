@@ -1,18 +1,18 @@
-const jwt = require('jsonwebtoken');
+import jwt, { SignOptions } from 'jsonwebtoken';
 
-const secret = process.env.JWT_SECRET || 'seusecretdetoken';
+const secret: string = process.env.JWT_SECRET || 'seusecretdetoken';
 
-const jwtConfig = {
+const jwtConfig: SignOptions = {
   algorithm: 'HS256',
   expiresIn: '7d',
 };
 
-const createToken = (userWithoutPassword) => {
+export const createToken = (userWithoutPassword: Record<string, any>): string => {
   const token = jwt.sign({ data: userWithoutPassword }, secret, jwtConfig);
   return token;
 };
 
-const verifyToken = (authorization) => {
+export const verifyToken = (authorization: string): any => {
   try {
     const payload = jwt.verify(authorization, secret);
     return payload;
@@ -21,7 +21,7 @@ const verifyToken = (authorization) => {
   }
 };
 
-module.exports = {
+export default {
   createToken,
   verifyToken,
 };

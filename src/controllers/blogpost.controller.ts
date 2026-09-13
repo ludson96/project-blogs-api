@@ -1,10 +1,12 @@
-const blogPostService = require('../services/blogpost.service');
+import { Request, Response } from 'express';
+import blogPostService from '../services/blogpost.service';
 
-const getAllBlogPost = async (_req, res) => {
+export const getAllBlogPost = async (req: Request, res: Response): Promise<any> => {
   try {
-    const allPosts = await blogPostService.getAllBlogPost();
+    const { page, limit } = req.query;
+    const allPosts = await blogPostService.getAllBlogPost({ page: page as string, limit: limit as string });
     return res.status(200).json(allPosts);
-  } catch (erro) {
+  } catch (erro: any) {
     return res.status(500).json({
       message: 'Erro ao buscar todos os posts',
       erro: erro.message,
@@ -12,13 +14,13 @@ const getAllBlogPost = async (_req, res) => {
   }
 };
 
-const getBlogPostById = async (req, res) => {
+export const getBlogPostById = async (req: Request, res: Response): Promise<any> => {
   try {
-    const { id } = req.params;
+    const id = req.params.id as string;
     const blogPost = await blogPostService.getBlogPostById(id);
     if (!blogPost) return res.status(404).json({ message: 'Post does not exist' });
     return res.status(200).json(blogPost);
-  } catch (erro) {
+  } catch (erro: any) {
     return res.status(500).json({
       message: 'Não foi possivel buscar o post com id especifico',
       erro: erro.message,
@@ -26,14 +28,14 @@ const getBlogPostById = async (req, res) => {
   }
 };
 
-const updateBlogPost = async (req, res) => {
+export const updateBlogPost = async (req: Request, res: Response): Promise<any> => {
   try {
-    const { id } = req.params;
+    const id = req.params.id as string;
     const conteudo = req.body;
     const postUpdated = await blogPostService.updateBlogPost(id, conteudo, req);
     if (postUpdated) return res.status(200).json(postUpdated);  
     return res.status(401).json({ message: 'Unauthorized user' });
-  } catch (erro) {
+  } catch (erro: any) {
     return res.status(500).json({
       message: 'Não foi possivel atualizar o post',
       erro: erro.message,
@@ -41,12 +43,12 @@ const updateBlogPost = async (req, res) => {
   }
 };
 
-const searchBlogPost = async (req, res) => {
+export const searchBlogPost = async (req: Request, res: Response): Promise<any> => {
   try {
     const { q } = req.query;
-    const searchedPost = await blogPostService.searchBlogPost(q);
+    const searchedPost = await blogPostService.searchBlogPost(q as string);
     return res.status(200).json(searchedPost);
-  } catch (erro) {
+  } catch (erro: any) {
     return res.status(500).json({
       message: 'Não foi possivel pesquisar pelo titulo',
       erro: erro.message,
@@ -54,13 +56,13 @@ const searchBlogPost = async (req, res) => {
   }
 };
 
-const createPost = async (req, res) => {
+export const createPost = async (req: Request, res: Response): Promise<any> => {
   try {
     const insert = req.body;
     const newPost = await blogPostService.createPost(insert, req);
     if (!newPost) return res.status(400).json({ message: 'one or more "categoryIds" not found' });
     return res.status(201).json(newPost);
-  } catch (erro) {
+  } catch (erro: any) {
     return res.status(500).json({
       message: 'Erro ao tentar criar um post',
       erro: erro.message,
@@ -68,9 +70,9 @@ const createPost = async (req, res) => {
   }
 };
 
-const deletePost = async (req, res) => {
+export const deletePost = async (req: Request, res: Response): Promise<any> => {
   try {
-    const { id } = req.params;
+    const id = req.params.id as string;
 
     const blogPost = await blogPostService.getBlogPostById(id);
     if (!blogPost) return res.status(404).json({ message: 'Post does not exist' });
@@ -79,7 +81,7 @@ const deletePost = async (req, res) => {
     if (postDeleted) return res.status(204).end();  
 
     return res.status(401).json({ message: 'Unauthorized user' });
-  } catch (erro) {
+  } catch (erro: any) {
     return res.status(500).json({
       message: 'Erro ao tentar deletar um post',
       erro: erro.message,
@@ -87,7 +89,7 @@ const deletePost = async (req, res) => {
   }
 };
 
-module.exports = {
+export default {
   getAllBlogPost,
   getBlogPostById,
   updateBlogPost,
