@@ -9,7 +9,6 @@
 [![JWT](https://img.shields.io/badge/JWT-Auth_Tokens-000000.svg?style=for-the-badge&logo=JSON%20web%20tokens)](https://jwt.io/)
 [![Swagger](https://img.shields.io/badge/Swagger-OpenAPI_3-85EA2D.svg?style=for-the-badge&logo=swagger)](https://swagger.io/)
 [![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED.svg?style=for-the-badge&logo=docker)](https://www.docker.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 > 🇧🇷 **Português** | 🇺🇸 [**English Version**](README.en.md)
 
@@ -27,7 +26,6 @@ API RESTful de gerenciamento de conteúdo e publicações para blogs, construíd
 - [📁 Estrutura do Repositório](#-estrutura-do-repositório)
 - [💡 Decisões Técnicas](#-decisões-técnicas)
 - [🚀 Como Executar o Projeto](#-como-executar-o-projeto)
-- [📄 Licença](#-licença)
 
 ## 📝 Sobre o Projeto
 
@@ -224,10 +222,6 @@ project-blogs-api/
    ```
 
 Acesse a documentação interativa em `http://localhost:3000/api-docs`.
-
-## 📄 Licença
-
-Este projeto está sob a licença [MIT](https://opensource.org/licenses/MIT).
 
 <div align="center">
   Desenvolvido por <strong>Ludson Pereira dos Santos</strong> 🚀<br />
